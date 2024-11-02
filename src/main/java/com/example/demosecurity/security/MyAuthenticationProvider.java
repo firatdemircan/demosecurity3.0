@@ -37,7 +37,7 @@ public class MyAuthenticationProvider implements AuthenticationProvider {
         }
 
 
-        return authentication;
+        return null;
     }
 
     @Override
