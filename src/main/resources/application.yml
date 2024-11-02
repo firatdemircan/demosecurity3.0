@@ -1,0 +1,13 @@
+server:
+  port: 8050
+
+spring:
+  jpa:
+    open-in-view: 'false'
+    show-sql: 'true'
+    hibernate:
+      ddl-auto: update
+  datasource:
+    username: postgres
+    url: jdbc:postgresql://localhost:5432/securitydemo
+    password: 47444744
