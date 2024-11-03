@@ -25,8 +25,9 @@ public class LoginController {
     @PostMapping("login")
     public Map<String,Object> login(@RequestBody UserLoginDto userLoginDto) throws JsonProcessingException {
         Map<String,Object> map = new HashMap<>();
-        LoggedUserModel loggedUserModel = (LoggedUserModel) authenticationProvider.authenticate(new UsernamePasswordAuthenticationToken(userLoginDto.username(), userLoginDto.password()));
-        String token = jwtUtil.generateToken(loggedUserModel);
+        Authentication authenticate = authenticationProvider.authenticate(new UsernamePasswordAuthenticationToken(userLoginDto.username(), userLoginDto.password()));
+        String token = jwtUtil.generateToken(authenticate);
+        LoggedUserModel loggedUserModel = (LoggedUserModel) authenticate.getPrincipal();
         map.put("token",token);
         map.put("user",loggedUserModel);
         return map;

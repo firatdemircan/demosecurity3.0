@@ -11,3 +11,4 @@ spring:
     username: postgres
     url: jdbc:postgresql://localhost:5432/securitydemo
     password: 47444744
+

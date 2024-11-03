@@ -17,6 +17,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.List;
 
 @Component
 @RequiredArgsConstructor
@@ -30,26 +31,27 @@ public class JwtFilter extends OncePerRequestFilter {
 
 
         String token = parseToken(request);
-
+        LoggedUserModel authenticationFromToken=null;
         if (token != null) {
             //then validate token and give it to username and password authentication token
-            LoggedUserModel authenticationFromToken = jwtUtil.getAuthenticationFromToken(token);
 
             try {
-                if (jwtUtil.validateToken(token)) {
-                    LoggedUserModel authenticationFromToken1 = jwtUtil.getAuthenticationFromToken(token);
-                }
+                authenticationFromToken = jwtUtil.getAuthenticationFromToken(token);
+
             } catch (JsonProcessingException e) {
                 throw new IOException("user not found");
             }
 
             if(authenticationFromToken!=null) {
-                UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(authenticationFromToken, "", Arrays.asList(new SimpleGrantedAuthority(authenticationFromToken.getRole())));
+                UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(authenticationFromToken, "", List.of(new SimpleGrantedAuthority(authenticationFromToken.getRole())));
                 authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(authToken);
             }
 
         }
+
+        filterChain.doFilter(request,response);
+
 
 
     }
