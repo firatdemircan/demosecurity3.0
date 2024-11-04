@@ -19,6 +19,7 @@ public class SecurityConfiguration {
     private final MyAuthenticationProvider authenticationProvider;
     private final JwtFilter jwtFilter;
     private final MyProviderEntryPoint myProviderEntryPoint;
+    private final MyAccessDeniedHandler myAccessDeniedHandler;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -28,9 +29,9 @@ public class SecurityConfiguration {
                 )
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/user/login").permitAll()
-                        .anyRequest().authenticated() // Secure all other requests
+                        .anyRequest().authenticated()// Secure all other requests
                 ).exceptionHandling(entry ->
-                        entry.authenticationEntryPoint(myProviderEntryPoint))
+                        entry.authenticationEntryPoint(myProviderEntryPoint).accessDeniedHandler(myAccessDeniedHandler))
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)

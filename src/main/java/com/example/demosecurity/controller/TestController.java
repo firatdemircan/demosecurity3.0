@@ -6,16 +6,25 @@ import com.example.demosecurity.repository.RoleRepository;
 import com.example.demosecurity.repository.UserRepository;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
 
-@Component
+@RestController
 @RequiredArgsConstructor
+@RequestMapping("test")
 public class TestController {
 
     private final RoleRepository roleRepository;
     private final UserRepository userRepository;
+
+
+    @GetMapping("xx")
+    public String testSecurity(){
+        return "Çalışıyor";
+    }
 
 
     @PostConstruct

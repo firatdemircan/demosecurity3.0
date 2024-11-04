@@ -31,7 +31,7 @@ public class MyAuthenticationProvider implements AuthenticationProvider {
             if (byUsername.get().getPassword().equals(password)) {
 
 
-                LoggedUserModel loggedUserModel = new LoggedUserModel(username,byUsername.get().getRoleEntity().getRolename());
+                LoggedUserModel loggedUserModel = new LoggedUserModel(username, byUsername.get().getRoleEntity().getRolename());
                 return new UsernamePasswordAuthenticationToken(loggedUserModel, "");
 
 

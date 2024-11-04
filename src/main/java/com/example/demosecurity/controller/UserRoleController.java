@@ -7,6 +7,7 @@ import com.example.demosecurity.models.dtos.UserSaveDTO;
 import com.example.demosecurity.service.RoleService;
 import com.example.demosecurity.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("userrole")
 @RequiredArgsConstructor
+@PreAuthorize("hasAuthority('ADMIN')")
 public class UserRoleController {
 
     private final UserService userService;
