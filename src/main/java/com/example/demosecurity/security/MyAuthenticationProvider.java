@@ -29,8 +29,12 @@ public class MyAuthenticationProvider implements AuthenticationProvider {
         Optional<UserEntity> byUsername = userRepository.findByUsername(username);
         if (byUsername.isPresent()) {
             if (byUsername.get().getPassword().equals(password)) {
+
+
                 LoggedUserModel loggedUserModel = new LoggedUserModel(username,byUsername.get().getRoleEntity().getRolename());
                 return new UsernamePasswordAuthenticationToken(loggedUserModel, "");
+
+
             }
         } else {
             throw new BadCredentialsException("Invalid username or password");

@@ -23,7 +23,7 @@ public class TestController {
         RoleEntity roleForSave = new RoleEntity();
 
         Optional<RoleEntity> roleEntityById = roleRepository.findByRolename("admin");
-        if(!roleEntityById.isPresent()){
+        if(roleEntityById.isEmpty()){
             RoleEntity roleEntity = new RoleEntity();
             roleEntity.setRolename("admin");
             roleForSave = roleRepository.save(roleEntity);
@@ -32,7 +32,7 @@ public class TestController {
         }
 
         Optional<UserEntity> userEntityById = userRepository.findByUsername("firat.demircan");
-        if(!userEntityById.isPresent()){
+        if(userEntityById.isEmpty()){
             UserEntity userEntity = new UserEntity("firat.demircan","123456",roleForSave);
             userRepository.save(userEntity);
         }
