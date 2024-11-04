@@ -1,11 +1,12 @@
 package com.example.demosecurity.security.jwtsettings;
 
 import com.example.demosecurity.security.LoggedUserModel;
-import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.Version;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.jsonwebtoken.*;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtException;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -53,9 +54,7 @@ public class JwtUtilImpl implements JwtUtil {
 
     @Override
     public LoggedUserModel getAuthenticationFromToken(String token) throws JsonProcessingException {
-        LoggedUserModel o = objectMapper.readValue(extractAllClaims(token).getSubject(), LoggedUserModel.class);
-
-        return o;
+        return objectMapper.readValue(extractAllClaims(token).getSubject(), LoggedUserModel.class);
     }
 
     // Validate JWT token
@@ -95,6 +94,4 @@ public class JwtUtilImpl implements JwtUtil {
                 .parseClaimsJws(token)
                 .getBody();
     }
-
-
 }

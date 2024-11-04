@@ -10,5 +10,5 @@ spring:
   datasource:
     username: postgres
     url: jdbc:postgresql://localhost:5432/securitydemo
-    password: 47444744
+    password: 4744c4744C
 
