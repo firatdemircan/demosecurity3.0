@@ -11,5 +11,5 @@ you just need to give an db and rest is set.
 -username = firat.demircan
 -password = 123456 
 
-with this you can get a token right away and test endpoint.
+with this you can get a token right away and test endpoints.
 
