@@ -31,10 +31,12 @@ public class TestController {
     }
 
 
+    @PostConstruct
     public void xx() {
-        RoleEntity roleForSave = new RoleEntity();
+        new RoleEntity();
+        RoleEntity roleForSave;
 
-        Optional<RoleEntity> roleEntityById = roleRepository.findByRolename("admin");
+        Optional<RoleEntity> roleEntityById = roleRepository.findByRolename("ADMIN");
         if (roleEntityById.isEmpty()) {
             RoleEntity roleEntity = new RoleEntity();
             roleEntity.setRolename("admin");
